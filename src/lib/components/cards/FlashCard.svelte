@@ -10,6 +10,32 @@
 		goLeft = $bindable(false),
 		disabled = false
 	}: { card: Card; isFlipped: boolean; goLeft: boolean; disabled: boolean } = $props();
+
+	const cardJson: Record<string, string | string[]> = JSON.parse(card.front);
+
+	let front = '';
+
+	switch (cardJson['type']) {
+		case 'normal':
+			front = cardJson['content'] as string;
+			break;
+		case 'tf':
+			front = cardJson['content'] as string;
+			front = `True or False: <br />${front}`;
+			break;
+		case 'mc':
+			let options = cardJson['content'] as string[];
+
+			front = `${options[0]}<br/><br/>`;
+			options.slice(1).map((option, idx) => {
+				const choice = String.fromCharCode(97 + idx);
+				front += `${choice}) ${option}<br/>`;
+			});
+			break;
+		default:
+			front = 'Unknown card type';
+			break;
+	}
 </script>
 
 <button
@@ -35,10 +61,10 @@
 		class:flipped={isFlipped}
 	>
 		<div class="flashcard-front shadow">
-			<p>{card.front}</p>
+			<p>{@html front}</p>
 		</div>
 		<div class="flashcard-back shadow">
-			<p>{card.back}</p>
+			<p>{@html card.back}</p>
 		</div>
 	</div>
 </button>
@@ -59,7 +85,7 @@
 
 	.flashcard-front,
 	.flashcard-back {
-		@apply absolute flex h-full w-full items-center justify-center rounded-xl p-6 font-medium;
+		@apply absolute flex h-full w-full items-center justify-center rounded-xl p-6 text-left font-medium;
 		backface-visibility: hidden;
 	}
 	.flashcard-front {
