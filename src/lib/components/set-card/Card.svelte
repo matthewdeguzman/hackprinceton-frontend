@@ -5,7 +5,7 @@
 </script>
 
 <button
-	class="relative flex h-[25vw] max-h-[200px] min-h-[150px] w-[50vw] min-w-[300px] max-w-[400px] flex-col rounded-xl border-2 border-solid p-4 shadow transition-all hover:border-blue"
+	class="relative flex h-[25vw] max-h-[200px] min-h-[150px] w-[50vw] min-w-[300px] max-w-[400px] flex-col rounded-xl border-2 border-solid border-transparent p-4 shadow transition-all hover:border-blue"
 >
 	<div class="grow">
 		<h1 class="text-left text-xl font-bold">{title}</h1>
