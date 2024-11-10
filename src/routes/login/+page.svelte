@@ -5,7 +5,7 @@
 
 	import LoaderCircle from 'lucide-svelte/icons/loader-circle';
 
-	import tokenStore from '$lib/stores/auth';
+	import { token as tokenStore, user as userStore } from '$lib/stores/auth';
 	import { API_HOST } from '$lib/vars';
 
 	let identifier = '';
@@ -36,10 +36,10 @@
 			});
 
 			if (response.ok) {
-				console.log('Login successful');
 				const result = await response.json();
-				const { token } = result;
+				const { token, user } = result;
 				tokenStore.set(token);
+				userStore.set(user);
 				window.location.href = '/sets';
 			} else {
 				console.error('Login failed', response.statusText);

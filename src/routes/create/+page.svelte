@@ -7,13 +7,13 @@
 
 	import LoaderCircle from 'lucide-svelte/icons/loader-circle';
 
-	import tokenStore from '$lib/stores/auth';
+	import { token as tokenStore } from '$lib/stores/auth';
 	import { API_HOST } from '$lib/vars';
 
 	let autoDistribution = true;
 	let createLoading = false;
 
-	let title = '';
+	let name = '';
 	let description = '';
 	let file: File | null = null;
 
@@ -31,7 +31,7 @@
 		formData.append('file', file);
 
 		let metadata = {
-			title,
+			name,
 			description,
 			tfCount: autoDistribution ? -1 : tfCount,
 			mcCount: autoDistribution ? -1 : mcCount,
@@ -50,11 +50,9 @@
 			});
 
 			if (response.ok) {
-				console.log('Login successful');
 				const result = await response.json();
-				const { token } = result;
-				tokenStore.set(token);
-				window.location.href = '/sets';
+				const { setId } = result;
+				window.location.href = `/set/${setId}`;
 			} else {
 				console.error('Login failed', response.statusText);
 			}
@@ -74,8 +72,8 @@
 
 		<form class="mt-16 flex flex-col items-center" on:submit={handleSubmit}>
 			<div class="grid w-full max-w-sm items-center gap-2">
-				<Label for="title">Title</Label>
-				<Input bind:value={title} id="title" placeholder="Complexity Theory" type="text" />
+				<Label for="name">Title</Label>
+				<Input bind:value={name} id="name" placeholder="Complexity Theory" type="text" />
 			</div>
 
 			<div class="mt-10 grid w-full max-w-sm items-center gap-2">

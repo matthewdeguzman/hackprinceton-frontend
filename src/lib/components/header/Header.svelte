@@ -1,11 +1,13 @@
 <script lang="ts">
-	import tokenStore from '$lib/stores/auth';
+	import { token as tokenStore, user as userStore } from '$lib/stores/auth';
 	import { Plus } from 'lucide-svelte';
 
 	const logout = () => {
 		window.location.href = '/';
 		tokenStore.set(null);
-		localStorage.removeItem('token');
+		localStorage.removeItem('auth_token');
+		userStore.set(null);
+		localStorage.removeItem('auth_user');
 	};
 </script>
 
