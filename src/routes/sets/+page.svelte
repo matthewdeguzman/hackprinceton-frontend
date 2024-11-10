@@ -21,6 +21,7 @@
 
 			if (response.ok) {
 				sets = await response.json();
+				console.log(sets);
 			} else {
 				console.error('Login failed', response.statusText);
 			}
@@ -56,7 +57,12 @@
 					</div>
 				{:else}
 					{#each sets as set}
-						<Card title={set.name} numQuestions={set.cardCount} lastStudied={new Date()} />
+						<Card
+							title={set.name}
+							numQuestions={set.cardCount}
+							id={set.setId}
+							lastStudied={new Date()}
+						/>
 					{/each}
 				{/if}
 			</div>
