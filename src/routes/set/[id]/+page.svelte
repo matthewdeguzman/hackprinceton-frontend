@@ -10,11 +10,15 @@
 	import FlashCard from '$lib/components/cards/FlashCard.svelte';
 
 	let { data }: { data: PageData } = $props();
-	let cards: Card[] = $state(data.cards ?? []);
+	const title = data.title;
+	const ogCards: Card[] = data.cards ?? [];
+
+	let cards: Card[] = $state(ogCards ?? []);
 	let activeCardIdx = $state(0);
 	let isLooping = $state(false);
 	let isFlipped: boolean = $state(false);
 	let goLeft: boolean = $state(false);
+	let shuffled: boolean = $state(false);
 
 	function resetFlip(fn: () => void) {
 		if (isFlipped) {
@@ -61,7 +65,14 @@
 	}
 
 	function shuffle() {
+		shuffled = true;
 		cards = cards.sort(() => Math.random() - 0.5);
+		activeCardIdx = 0;
+	}
+
+	function unshuffle() {
+		shuffled = false;
+		cards = ogCards;
 		activeCardIdx = 0;
 	}
 
@@ -78,9 +89,12 @@
 </script>
 
 <svelte:window onkeyup={handleKeyClick} />
-<div class="mt-48 flex items-center">
+<div class="mt-20 flex items-center">
 	<div class="flex w-full flex-col items-center">
 		<div class="flex max-w-[1200px] flex-col items-center">
+			<div class="mb-36 flex flex-col items-center">
+				<h1 class="text-3xl font-bold">{title}</h1>
+			</div>
 			<p class="mb-4">{activeCardIdx + 1} / {cards.length}</p>
 
 			{#key cards}
@@ -94,27 +108,38 @@
 			{/key}
 
 			<div class="mt-4 flex gap-x-4">
-				<button onclick={shuffle}><Shuffle strokeWidth={1.5} /></button>
-
-				<button class:disabled={!isLooping && activeCardIdx === 0} onclick={previousCard}
-					><ChevronLeft size={30} strokeWidth={1.5} /></button
+				<button
+					class:text-green-600={shuffled}
+					class="transition-all hover:text-green-600"
+					onclick={() => (shuffled ? unshuffle() : shuffle())}><Shuffle strokeWidth={1.5} /></button
 				>
 
-				<button class:disabled={!isLooping && activeCardIdx === cards.length - 1} onclick={nextCard}
-					><ChevronRight size={30} strokeWidth={1.5} /></button
+				<button
+					class={!isLooping && activeCardIdx === 0 ? 'disabled' : 'enabled'}
+					onclick={previousCard}><ChevronLeft size={30} strokeWidth={1.5} /></button
 				>
 
-				<button class:text-green-600={isLooping} onclick={() => (isLooping = !isLooping)}
-					><Repeat strokeWidth={1.5} /></button
+				<button
+					class={!isLooping && activeCardIdx === cards.length - 1 ? 'disabled' : 'enabled'}
+					onclick={nextCard}><ChevronRight size={30} strokeWidth={1.5} /></button
+				>
+
+				<button
+					class:text-green-600={isLooping}
+					class="transition-all hover:text-green-600"
+					onclick={() => (isLooping = !isLooping)}><Repeat strokeWidth={1.5} /></button
 				>
 			</div>
 		</div>
 	</div>
 </div>
 
-<style>
+<style lang="postcss">
 	.disabled {
-		opacity: 0.5;
-		cursor: not-allowed;
+		@apply cursor-not-allowed opacity-50;
+	}
+
+	.enabled {
+		@apply cursor-pointer opacity-100 transition-all hover:text-blue;
 	}
 </style>

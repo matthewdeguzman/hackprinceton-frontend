@@ -2,6 +2,7 @@ import type { PageLoad } from './$types';
 
 export const load: PageLoad = ({ params }) => {
 	return {
+		title: 'Study set 1',
 		cards: [
 			{
 				id: '1',
