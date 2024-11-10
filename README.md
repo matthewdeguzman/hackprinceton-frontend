@@ -1,38 +1,6 @@
-# sv
+# Saiki
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+https://github.com/user-attachments/assets/d280e955-a3e8-4957-b9bc-31a3c6ea37c9
 
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+# Description
+Our project envisions an intelligent platform that seamlessly transforms provided materials into dynamic flashcards, eliminating the manual creation process. By automating study set generation, we empower students and learners to focus fully on what matters most: mastering their subjects and enhancing their knowledge, without the distraction of organizing study aids. This vision aims to redefine the study experience, making it more efficient, engaging, and ultimately, more effective for each user.
