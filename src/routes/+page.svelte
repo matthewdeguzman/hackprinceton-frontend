@@ -60,7 +60,7 @@
 
 	function flipBackward() {
 		isFlipped = true;
-		setTimeout(() => flipForward(true), 3500);
+		setTimeout(() => flipForward(true), 5000);
 	}
 
 	function nextCard() {
