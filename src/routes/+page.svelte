@@ -79,7 +79,9 @@
 		</div>
 
 		<div class="mt-20 flex w-full flex-col items-center">
-			<a class="border-blue text-blue rounded-full border border-solid px-6 py-2"> Get Started</a>
+			<a href="/signup" class="rounded-full border border-solid border-blue px-6 py-2 text-blue"
+				>Get Started</a
+			>
 		</div>
 	</div>
 </div>

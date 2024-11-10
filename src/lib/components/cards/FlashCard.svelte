@@ -69,6 +69,7 @@
 	.flashcard-back {
 		@apply border border-solid border-gray-500;
 		background-color: #afafaf;
+		opacity: 0.8;
 		color: black;
 		transform: rotateX(180deg);
 	}
