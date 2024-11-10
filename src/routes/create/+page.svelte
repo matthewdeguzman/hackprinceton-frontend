@@ -22,7 +22,7 @@
 
 			<div class="mt-10 grid w-full max-w-sm items-center gap-2">
 				<Label for="files">Files</Label>
-				<Input on:change={(e) => console.log(e.files)} id="files" type="file" />
+				<Input on:change={(e) => console.log(e)} id="files" type="file" />
 			</div>
 
 			<div class="my-10 grid w-full max-w-sm items-center gap-2">
