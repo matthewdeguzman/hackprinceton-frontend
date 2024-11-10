@@ -7,15 +7,17 @@
 	let {
 		card,
 		isFlipped = $bindable(false),
-		goLeft = $bindable(false)
-	}: { card: Card; isFlipped: boolean; goLeft: boolean } = $props();
+		goLeft = $bindable(false),
+		disabled = false
+	}: { card: Card; isFlipped: boolean; goLeft: boolean; disabled: boolean } = $props();
 </script>
 
 <button
 	class="flashcard"
+	class:cursor-default={disabled}
+	{disabled}
 	onclick={() => {
 		isFlipped = !isFlipped;
-		console.log(isFlipped);
 	}}
 >
 	<div
@@ -32,10 +34,10 @@
 		class="flashcard-inner"
 		class:flipped={isFlipped}
 	>
-		<div class="flashcard-front">
+		<div class="flashcard-front shadow">
 			<p>{card.front}</p>
 		</div>
-		<div class="flashcard-back">
+		<div class="flashcard-back shadow">
 			<p>{card.back}</p>
 		</div>
 	</div>
@@ -43,7 +45,7 @@
 
 <style lang="postcss">
 	.flashcard {
-		@apply absolute h-[300px] w-[600px] cursor-pointer;
+		@apply absolute h-[300px] w-[500px];
 		perspective: 1000px;
 	}
 	.flashcard-inner {
@@ -57,15 +59,17 @@
 
 	.flashcard-front,
 	.flashcard-back {
-		@apply absolute flex h-full w-full items-center justify-center rounded-xl;
+		@apply absolute flex h-full w-full items-center justify-center rounded-xl p-6 font-medium;
 		backface-visibility: hidden;
 	}
 	.flashcard-front {
-		background-color: #f8f9fa;
+		@apply border border-solid border-gray-400;
+		background-color: white;
 	}
 	.flashcard-back {
-		background-color: #343a40;
-		color: white;
+		@apply border border-solid border-gray-500;
+		background-color: #afafaf;
+		color: black;
 		transform: rotateX(180deg);
 	}
 </style>

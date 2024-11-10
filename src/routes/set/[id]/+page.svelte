@@ -84,7 +84,7 @@
 			<p class="mb-4">{activeCardIdx + 1} / {cards.length}</p>
 
 			{#key cards}
-				<div class="relative h-[300px] w-[600px]">
+				<div class="relative h-[300px] w-[500px]">
 					{#each cards as card, i (card.id)}
 						{#if i === activeCardIdx}
 							<FlashCard bind:isFlipped bind:goLeft {card} />

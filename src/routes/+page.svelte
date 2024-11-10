@@ -1,15 +1,85 @@
+<script lang="ts">
+	import FlashCard from '$lib/components/cards/FlashCard.svelte';
+	import type { Card } from '$lib/types/sets';
+	import { onMount } from 'svelte';
+
+	const informationalCards: Card[] = [
+		{
+			id: '1',
+			front: 'What is Saiki?',
+			back: 'Saiki is a generative AI solution that creates flash cards for you.',
+			set_id: '1'
+		},
+		{
+			id: '2',
+			front: 'Who can use Saiki?',
+			back: 'Anyone! Saiki is designed to help you study smarter, not harder.',
+			set_id: '1'
+		},
+		{
+			id: '3',
+			front: 'How does Saiki work?',
+			back: 'Saiki uses generative AI to create flash cards from your notes.',
+			set_id: '1'
+		},
+		{
+			id: '4',
+			front: 'What does Saiki mean?',
+			back: 'Saiki is Japanese for "talent" or "genius" which you will become after using it!',
+			set_id: '1'
+		}
+	];
+
+	let isFlipped = $state(false);
+	let activeCardIdx = $state(0);
+	let goLeft = $state(true);
+
+	function flipForward(moveToNext: boolean) {
+		isFlipped = false;
+		if (moveToNext) {
+			setTimeout(nextCard, 600);
+		} else {
+			setTimeout(flipBackward, 600);
+		}
+	}
+
+	function flipBackward() {
+		isFlipped = true;
+		setTimeout(() => flipForward(true), 3500);
+	}
+
+	function nextCard() {
+		activeCardIdx = (activeCardIdx + 1) % informationalCards.length;
+		setTimeout(() => flipForward(false), 1500);
+	}
+
+	onMount(() => {
+		setTimeout(() => flipForward(false), 1500);
+	});
+</script>
+
 <div class="flex flex-col items-center">
 	<div class="w-full max-w-[1200px]">
-		<h1 class="mt-16 text-3xl font-semibold">Use product to study smarter, <br />not harder.</h1>
+		<div class="flex flex-col items-center">
+			<h1 class="mt-16 pl-6 text-center text-4xl font-semibold">
+				Use S<span class="text-blue">ai</span>ki to study smarter, <br />not harder.
+			</h1>
+		</div>
 
-		<div class="mt-32 flex w-full flex-col items-center">
-			<div class="flex h-[200px] w-[300px] flex-col items-center border border-solid border-black">
-				<h1>Insertion animation here</h1>
+		<div class="mt-28 flex w-full flex-col items-center">
+			<div class="flex h-[300px] w-[500px] flex-col items-center">
+				<div class="relative h-[300px] w-[500px]">
+					{#each informationalCards as card, i (card.id)}
+						{#if i === activeCardIdx}
+							<FlashCard bind:isFlipped bind:goLeft {card} disabled={true} />
+						{/if}
+					{/each}
+				</div>
 			</div>
 		</div>
 
-		<div class="mt-16 flex w-full flex-col items-center">
-			<a class="rounded-full bg-green-300 px-6 py-2"> Get Started</a>
+		<div class="mt-20 flex w-full flex-col items-center">
+			<a class="border-blue text-blue rounded-full border border-solid px-6 py-2"> Get Started</a>
 		</div>
 	</div>
 </div>
