@@ -95,7 +95,7 @@
 <div class="mt-20 flex items-center">
 	<div class="flex w-full flex-col items-center">
 		<div class="flex max-w-[1200px] flex-col items-center">
-			<div class="mb-36 flex flex-col items-center">
+			<div class="mb-28 flex flex-col items-center">
 				<h1 class="text-3xl font-bold">{title}</h1>
 			</div>
 			<p class="mb-4">{activeCardIdx + 1} / {cards.length}</p>
