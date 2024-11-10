@@ -3,7 +3,7 @@
 	import { Plus } from 'lucide-svelte';
 
 	const logout = () => {
-		window.location.href = '/login';
+		window.location.href = '/';
 		tokenStore.set(null);
 		localStorage.removeItem('token');
 	};

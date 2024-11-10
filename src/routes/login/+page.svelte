@@ -70,13 +70,13 @@
 	</div>
 
 	<div class="mt-10">
-		<FormButton type="submit">
+		<button class="rounded-full bg-blue px-6 py-2 text-sm text-white" type="submit">
 			<div class="flex items-center gap-2">
 				<p>Sign In</p>
 				{#if loginLoading}
 					<LoaderCircle class="h-4 w-4 animate-spin text-white" />
 				{/if}
 			</div>
-		</FormButton>
+		</button>
 	</div>
 </form>
