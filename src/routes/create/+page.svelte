@@ -33,9 +33,11 @@
 		let metadata = {
 			name,
 			description,
-			tfCount: autoDistribution ? -1 : tfCount,
-			mcCount: autoDistribution ? -1 : mcCount,
-			normalCount: autoDistribution ? -1 : normalCount
+			options: {
+				tfCount: autoDistribution ? -1 : tfCount,
+				mcCount: autoDistribution ? -1 : mcCount,
+				normalCount: autoDistribution ? -1 : normalCount
+			}
 		};
 
 		formData.append('metadata', JSON.stringify(metadata));

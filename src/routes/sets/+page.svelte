@@ -56,7 +56,7 @@
 					</div>
 				{:else}
 					{#each sets as set}
-						<Card title={set.title} numQuestions={set.cardCount} lastStudied={new Date()} />
+						<Card title={set.name} numQuestions={set.cardCount} lastStudied={new Date()} />
 					{/each}
 				{/if}
 			</div>
