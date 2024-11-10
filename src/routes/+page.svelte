@@ -9,25 +9,37 @@
 	const informationalCards: Card[] = [
 		{
 			id: '1',
-			front: 'What is Saiki?',
+			front: JSON.stringify({
+				type: 'normal',
+				content: 'What is Saiki?'
+			}),
 			back: 'Saiki is a generative AI solution that creates flash cards for you.',
 			set_id: '1'
 		},
 		{
 			id: '2',
-			front: 'Who can use Saiki?',
+			front: JSON.stringify({
+				type: 'normal',
+				content: 'Who can use Saiki?'
+			}),
 			back: 'Anyone! Saiki is designed to help you study smarter, not harder.',
 			set_id: '1'
 		},
 		{
 			id: '3',
-			front: 'How does Saiki work?',
+			front: JSON.stringify({
+				type: 'normal',
+				content: 'How does Saiki work?'
+			}),
 			back: 'Saiki uses generative AI to create flash cards from your notes.',
 			set_id: '1'
 		},
 		{
 			id: '4',
-			front: 'What does Saiki mean?',
+			front: JSON.stringify({
+				type: 'normal',
+				content: 'What does Saiki mean?'
+			}),
 			back: 'Saiki is Japanese for "talent" or "genius" which you will become after using it!',
 			set_id: '1'
 		}
