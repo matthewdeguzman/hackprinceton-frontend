@@ -89,12 +89,12 @@
 		backface-visibility: hidden;
 	}
 	.flashcard-front {
-		@apply border border-solid border-gray-400;
+		@apply border-2 border-solid border-gray-400;
 		background-color: white;
 	}
 	.flashcard-back {
-		@apply border border-solid border-gray-500;
-		background-color: #afafaf;
+		@apply border-2 border-solid border-blue;
+		background-color: #dbdbdb;
 		opacity: 0.8;
 		color: black;
 		transform: rotateX(180deg);

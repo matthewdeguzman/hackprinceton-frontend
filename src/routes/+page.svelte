@@ -77,7 +77,8 @@
 	<div class="w-full max-w-[1200px]">
 		<div class="flex flex-col items-center">
 			<h1 class="mt-16 pl-6 text-center text-4xl font-semibold">
-				Use S<span class="text-blue">ai</span>ki to study smarter, <br />not harder.
+				Use S<span class="text-blue">ai</span>ki to study <span class="italic">smarter</span>,
+				<br />not harder.
 			</h1>
 		</div>
 
