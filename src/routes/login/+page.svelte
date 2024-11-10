@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { Input } from '$lib/components/ui/input/index.js';
 	import { Label } from '$lib/components/ui/label/index.js';
-	import FormButton from '$lib/components/ui/form/form-button.svelte';
 
 	import LoaderCircle from 'lucide-svelte/icons/loader-circle';
 
+	import { goto } from '$app/navigation';
 	import { token as tokenStore, user as userStore } from '$lib/stores/auth';
 	import { API_HOST } from '$lib/vars';
 
@@ -40,7 +40,7 @@
 				const { token, user } = result;
 				tokenStore.set(token);
 				userStore.set(user);
-				window.location.href = '/sets';
+				goto('/sets');
 			} else {
 				console.error('Login failed', response.statusText);
 			}

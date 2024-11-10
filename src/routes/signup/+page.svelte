@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { Input } from '$lib/components/ui/input/index.js';
 	import { Label } from '$lib/components/ui/label/index.js';
-	import FormButton from '$lib/components/ui/form/form-button.svelte';
 
 	import LoaderCircle from 'lucide-svelte/icons/loader-circle';
 
+	import { goto } from '$app/navigation';
 	import { API_HOST } from '$lib/vars';
 
 	let name = '';
@@ -40,7 +40,7 @@
 
 			if (response.ok) {
 				console.log('Registration successful');
-				window.location.href = '/login';
+				goto('/login');
 			} else console.error('Registration failed', response.statusText);
 		} catch (error) {
 			console.error('Error during fetch', error);

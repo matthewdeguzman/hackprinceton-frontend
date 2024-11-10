@@ -7,6 +7,7 @@
 
 	import LoaderCircle from 'lucide-svelte/icons/loader-circle';
 
+	import { goto } from '$app/navigation';
 	import { token as tokenStore } from '$lib/stores/auth';
 	import { API_HOST } from '$lib/vars';
 
@@ -54,7 +55,7 @@
 			if (response.ok) {
 				const result = await response.json();
 				const { setId } = result;
-				window.location.href = `/set/${setId}`;
+				goto(`/set/${setId}`);
 			} else {
 				console.error('Login failed', response.statusText);
 			}

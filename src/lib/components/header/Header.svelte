@@ -1,9 +1,11 @@
 <script lang="ts">
 	import { token as tokenStore, user as userStore } from '$lib/stores/auth';
+
+	import { goto } from '$app/navigation';
 	import { Plus } from 'lucide-svelte';
 
 	const logout = () => {
-		window.location.href = '/';
+		goto('/');
 		tokenStore.set(null);
 		localStorage.removeItem('auth_token');
 		userStore.set(null);
