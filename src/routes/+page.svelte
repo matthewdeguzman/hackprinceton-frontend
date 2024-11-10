@@ -1,7 +1,10 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+
 	import FlashCard from '$lib/components/cards/FlashCard.svelte';
 	import type { Card } from '$lib/types/sets';
-	import { onMount } from 'svelte';
+
+	import { token as tokenStore } from '$lib/stores/auth';
 
 	const informationalCards: Card[] = [
 		{
@@ -79,8 +82,9 @@
 		</div>
 
 		<div class="mt-20 flex w-full flex-col items-center">
-			<a href="/signup" class="rounded-full border border-solid border-blue px-6 py-2 text-blue"
-				>Get Started</a
+			<a
+				href={$tokenStore ? `/sets` : `/signup`}
+				class="rounded-full border border-solid border-blue px-6 py-2 text-blue">Get Started</a
 			>
 		</div>
 	</div>
