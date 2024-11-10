@@ -73,7 +73,7 @@
 			<h1 class="text-3xl font-bold">Create the perfect study set.</h1>
 		</div>
 
-		<form class="mt-16 flex flex-col items-center" on:submit={handleSubmit}>
+		<form novalidate class="mt-16 flex flex-col items-center" on:submit={handleSubmit}>
 			<div class="grid w-full max-w-sm items-center gap-2">
 				<Label for="name">Title</Label>
 				<Input bind:value={name} id="name" placeholder="Complexity Theory" type="text" />

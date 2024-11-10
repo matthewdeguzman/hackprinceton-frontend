@@ -3,12 +3,30 @@
 	export let numQuestions: number;
 	export let lastStudied: Date | null = null;
 	export let id: string;
+
+	import { token as tokenStore } from '$lib/stores/auth';
+	import { API_HOST } from '$lib/vars';
+
 	import { Trash } from 'lucide-svelte';
 
-	function deleteSet(e: Event) {
+	const deleteSet = async (e: Event) => {
 		e.preventDefault();
-		console.log('Deleting set');
-	}
+		try {
+			const res = await fetch(`${API_HOST}/sets/${id}`, {
+				method: 'DELETE',
+				headers: {
+					Authorization: `Bearer ${$tokenStore}`
+				}
+			});
+			if (res.ok) {
+				location.reload();
+			} else {
+				console.error('Failed to delete set');
+			}
+		} catch (e) {
+			console.error('Failed to delete set');
+		}
+	};
 </script>
 
 <a
