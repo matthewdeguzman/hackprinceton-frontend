@@ -1,16 +1,18 @@
 <script lang="ts">
-	import type { PageData } from './$types';
-	import type { Card } from '$lib/types/sets';
+	import { onMount } from 'svelte';
 
 	import { ChevronRight } from 'lucide-svelte';
 	import { ChevronLeft } from 'lucide-svelte';
 	import { Shuffle } from 'lucide-svelte';
 	import { Repeat } from 'lucide-svelte';
 
+	import type { PageData } from './$types';
+	import type { Card } from '$lib/types/sets';
+
 	import FlashCard from '$lib/components/cards/FlashCard.svelte';
 
 	let { data }: { data: PageData } = $props();
-	const title = data.title;
+	const title = data.setName;
 	const ogCards: Card[] = data.cards ?? [];
 
 	let cards: Card[] = $state(ogCards ?? []);
@@ -20,16 +22,16 @@
 	let goLeft: boolean = $state(false);
 	let shuffled: boolean = $state(false);
 
-	function resetFlip(fn: () => void) {
+	const resetFlip = (fn: () => void) => {
 		if (isFlipped) {
 			isFlipped = false;
 			setTimeout(fn, 600);
 		} else {
 			fn();
 		}
-	}
+	};
 
-	function nextCardHelper() {
+	const nextCardHelper = () => {
 		let newIdx;
 		if (isLooping) {
 			newIdx = (activeCardIdx + 1) % cards.length;
@@ -41,12 +43,13 @@
 			goLeft = true;
 			activeCardIdx = newIdx;
 		}
-	}
-	function nextCard() {
-		resetFlip(nextCardHelper);
-	}
+	};
 
-	function previousCardHelper() {
+	const nextCard = () => {
+		resetFlip(nextCardHelper);
+	};
+
+	const previousCardHelper = () => {
 		let newIdx;
 		if (isLooping) {
 			newIdx = (activeCardIdx - 1 + cards.length) % cards.length;
@@ -58,25 +61,25 @@
 			goLeft = false;
 			activeCardIdx = newIdx;
 		}
-	}
+	};
 
-	function previousCard() {
+	const previousCard = () => {
 		resetFlip(previousCardHelper);
-	}
+	};
 
-	function shuffle() {
+	const shuffle = () => {
 		shuffled = true;
 		cards = cards.sort(() => Math.random() - 0.5);
 		activeCardIdx = 0;
-	}
+	};
 
-	function unshuffle() {
+	const unshuffle = () => {
 		shuffled = false;
 		cards = ogCards;
 		activeCardIdx = 0;
-	}
+	};
 
-	function handleKeyClick(event: KeyboardEvent) {
+	const handleKeyClick = (event: KeyboardEvent) => {
 		event.preventDefault();
 		if (event.key === 'ArrowRight') {
 			nextCard();
@@ -85,7 +88,7 @@
 		} else if (event.key === ' ') {
 			isFlipped = !isFlipped;
 		}
-	}
+	};
 </script>
 
 <svelte:window onkeyup={handleKeyClick} />

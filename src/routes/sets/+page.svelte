@@ -6,7 +6,7 @@
 	import { API_HOST } from '$lib/vars';
 
 	let fetchSetsLoading = false;
-	let sets = [];
+	let sets: any[] = [];
 
 	onMount(async () => {
 		fetchSetsLoading = true;
