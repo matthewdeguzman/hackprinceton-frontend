@@ -10,7 +10,7 @@
 	import FlashCard from '$lib/components/cards/FlashCard.svelte';
 
 	let { data }: { data: PageData } = $props();
-	const cards: Card[] = data.cards;
+	let cards: Card[] = $state(data.cards ?? []);
 	let activeCardIdx = $state(0);
 	let isLooping = $state(false);
 	let isFlipped: boolean = $state(false);
@@ -61,24 +61,37 @@
 	}
 
 	function shuffle() {
+		cards = cards.sort(() => Math.random() - 0.5);
 		activeCardIdx = 0;
-		cards.sort(() => Math.random() - 0.5);
-		console.log(cards);
+	}
+
+	function handleKeyClick(event: KeyboardEvent) {
+		event.preventDefault();
+		if (event.key === 'ArrowRight') {
+			nextCard();
+		} else if (event.key === 'ArrowLeft') {
+			previousCard();
+		} else if (event.key === ' ') {
+			isFlipped = !isFlipped;
+		}
 	}
 </script>
 
-<div class="flex min-h-[800px] items-center">
-	<div class="flex h-full w-full max-w-[1200px] flex-col items-center">
-		<div class="flex flex-col items-center">
+<svelte:window onkeyup={handleKeyClick} />
+<div class="mt-48 flex items-center">
+	<div class="flex w-full flex-col items-center">
+		<div class="flex max-w-[1200px] flex-col items-center">
 			<p class="mb-4">{activeCardIdx + 1} / {cards.length}</p>
 
-			<div class="relative h-[300px] w-[600px]">
-				{#each cards as card, i (card)}
-					{#if i === activeCardIdx}
-						<FlashCard bind:isFlipped bind:goLeft {card} />
-					{/if}
-				{/each}
-			</div>
+			{#key cards}
+				<div class="relative h-[300px] w-[600px]">
+					{#each cards as card, i (card.id)}
+						{#if i === activeCardIdx}
+							<FlashCard bind:isFlipped bind:goLeft {card} />
+						{/if}
+					{/each}
+				</div>
+			{/key}
 
 			<div class="mt-4 flex gap-x-4">
 				<button onclick={shuffle}><Shuffle strokeWidth={1.5} /></button>
