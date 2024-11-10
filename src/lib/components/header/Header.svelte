@@ -1,12 +1,24 @@
-<header class="border border-solid border-black h-[60px] w-full rounded-2xl flex items-center px-4">
-    <div class="flex items-center grow">
-        <h1>Logo Name</h1>
-    </div>
+<script lang="ts">
+	import tokenStore from '$lib/stores/auth';
 
-    <div class="flex gap-4">
-        <a>
-            Log in
-        </a>
-        <a>Sign up</a>
-    </div>
+	const logout = () => {
+		window.location.href = '/login';
+		tokenStore.set(null);
+		localStorage.removeItem('token');
+	};
+</script>
+
+<header class="flex h-[60px] w-full items-center rounded-2xl border border-solid border-black px-4">
+	<div class="flex grow items-center">
+		<h1>Logo Name</h1>
+	</div>
+
+	<div class="flex gap-4">
+		{#if $tokenStore}
+			<button on:click={logout}> Log out </button>
+		{:else}
+			<a href="/login"> Log in </a>
+			<a href="/signup">Sign up</a>
+		{/if}
+	</div>
 </header>
